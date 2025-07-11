@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="img\emoji.png" type="img.png">
+    <script src="paginas\script.js"></script>
+    <title>carta</title>
+
+</head>
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+<div class="carta-container">
+  <ul>
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="carta.html">Carta</a></li>
+    <li><a href="Dedicaciones.html">Dedicaciones</a></li>
+  </ul>
+</div>
+
+<!-- CONTENIDO DE LA CARTA -->
+<main>
+  <div class="container">
+    <div class="envelope-wrapper">
+      <div class="envelope">
+         <div class="heart">❤️</div>
+        <div class="letter">
+          <div class="text">
+            <strong>Dear Person.</strong>
+            <p>
+            Con este detalle quiero demostrarte cuanto te amo. 
+            Ya ha pasado un año y medio desde que nos conocimos,
+            quien diria que ese dia conoceria al amor de mi vida. 
+            Me sorprende la verdad el tiempo que llevamos 
+            espero que esto dure muchisimo tiempo mas.
+            Cada dia que paso a tu lado me siento feliz y 
+            con una sensacion de calma que se que solo tu me darias.
+            Gracias por tu paciencia, tus palabras de consuelo cuando las necesito, 
+            tus abrazos, besos y sobre todo por el amor que me das. Feliz año y medio 
+            TE AMO MUSHO ❤️
+            </p>
+        </div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  <script>
+    const envelope = document.querySelector('.envelope-wrapper');
+    envelope.addEventListener('click', () => {
+      envelope.classList.toggle('flap');
+    });
+  </script>
+</main>
+
+
+</body>
+</html>

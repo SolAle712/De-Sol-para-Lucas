@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Estilos -->
+
+   <link rel="stylesheet" href="styles.css">
+  
+     <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #121a17, #1c2a25);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .mensaje {
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ff7eae;
+      font-size: 2rem;
+      text-align: center;
+      z-index: 2;
+      animation: fadeIn 5s ease forwards;
+      animation-delay: 5s;
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+.nav-container {
+  position: relative;
+  z-index: 3;
+  background-color: rgba(137, 43, 226, 0.7); /* azul violeta semitransparente */
+  padding: 10px;
+}
+
+.nav-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.nav-container li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-container li a:hover {
+  color: #ff7eae;
+}
+
+
+  </style>
+
+ <!-- Tipografía -->
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Ícono de pestaña -->
+
+    <link rel="icon" href="img/cartacorazon.png" type="image/png">
+   
+<!-- Script-->
+    <script src="script.js" defer></script>
+
+    <title>Tu</title>
+</head>
+<body>
+    
+ <div class="nav-container">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="C:\Users\notebook\Desktop\S.M.A\paginas\carta.html">Carta</a></li>
+      <li><a href="C:\Users\notebook\Desktop\S.M.A\paginas\Dedicaciones.html">Dedicaciones</a></li>
+    </ul>
+  </div>
+
+    
+     <canvas id="canvas"></canvas>
+  <div class="mensaje">Feliz año y medio juntos 💕<br>Te amo con todo mi corazón</div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Dibujar corazón con path
+    function drawHeart(ctx, x, y, size, alpha) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(size, size);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(0, -3, -5, -3, -5, 0);
+      ctx.bezierCurveTo(-5, 3, 0, 6, 0, 8);
+      ctx.bezierCurveTo(0, 6, 5, 3, 5, 0);
+      ctx.bezierCurveTo(5, -3, 0, -3, 0, 0);
+      ctx.closePath();
+      ctx.fillStyle = `rgba(255, 0, 80, ${alpha})`;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    class Heart {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 100;
+        this.size = Math.random() * 0.6 + 0.2;
+        this.speed = Math.random() * 1.5 + 0.5;
+        this.alpha = Math.random() * 0.5 + 0.5;
+        this.angle = Math.random() * Math.PI * 2;
+        this.swing = Math.random() * 1.5;
+      }
+
+      update() {
+        this.y -= this.speed;
+        this.x += Math.sin(this.angle) * this.swing;
+        this.angle += 0.02;
+
+        if (this.y < -10) this.reset();
+      }
+
+      draw(ctx) {
+        drawHeart(ctx, this.x, this.y, this.size, this.alpha);
+      }
+    }
+
+    const hearts = [];
+    for (let i = 0; i < 100; i++) {
+      hearts.push(new Heart());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      hearts.forEach(h => {
+        h.update();
+        h.draw(ctx);
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+    </body>
+</html>   
+
